@@ -60,6 +60,8 @@ postgres=# \q
 3. Создаю триггерную функцию и сохраняю её в файл [good_sum_mart_sum.sql](https://github.com/nvdmike/OTUSPostgreSQL/blob/main/Lesson23/files/good_sum_mart_sum.sql "good_sum_mart_sum.sql"):
 
 ```sql
+set search_path = pract_functions, public;
+
 create or replace function good_sum_mart_sum() returns trigger as $$
 declare
   v_SalesQty integer;
@@ -86,6 +88,8 @@ $$ language plpgsql;
 4. Теперь создаю сам триггер и сохраняю его в файл [good_sum_mart_trg.sql](https://github.com/nvdmike/OTUSPostgreSQL/blob/main/Lesson23/files/good_sum_mart_trg.sql "good_sum_mart_trg.sql"):
 
 ```sql
+set search_path = pract_functions, public;
+
 create trigger good_sum_mart_trg
 after insert or update or delete on sales
 for each row execute function good_sum_mart_sum();
